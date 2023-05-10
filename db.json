@@ -1,0 +1,13 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "name": "Carro legal",
+      "year": "2013 - 2015",
+      "price": 30000.0,
+      "currency": "R$",
+      "brand": "Marca legal",
+      "warranty": "5 anos"
+    }
+  ]
+}
