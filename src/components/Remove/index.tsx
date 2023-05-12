@@ -1,6 +1,4 @@
-import Alert from 'react-bootstrap/Alert';
-
-export default async function Remove (id: number) {
+export default async function Remove (id: number, onRemoveSuccess: () => void) {
     const response = await fetch(`http://localhost:3000/cars/${id}`, {
         method: "DELETE",
         headers: {
@@ -8,17 +6,5 @@ export default async function Remove (id: number) {
         },
     });
 
-    if (response.ok) {
-        return (
-            <Alert variant='primary'>
-                Remove success
-            </Alert>
-        )
-    } else {
-        return (
-            <Alert variant='danger' dismissible>
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-            </Alert>
-        )
-    }
+    if (response.ok) onRemoveSuccess();
 }

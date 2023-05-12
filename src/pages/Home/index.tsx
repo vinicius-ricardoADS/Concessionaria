@@ -56,15 +56,23 @@ export default function Home() {
                                 <td><Button value={car.id} as='a' href='/create' variant="primary">Edit</Button>{' '}</td>
                                 <td><Button onClick={(e) => {
 									e.preventDefault();
-									Remove(car.id);
+									Remove (car.id, () => {
+										fetch('http://localhost:3000/cars', {
+											headers: {
+												Accept: 'application/json'
+											}
+										}).then(res => res.json()).then(res => setCars(res));
+									});
 								}} value={car.id} as='a' variant="danger">Remove</Button>{' '}</td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <Spinner animation="border" role="status">
-								<span className="visually-hidden">Loading...</span>
-							</Spinner>
+							<td colSpan={8}>
+								<Spinner animation="border" role="status">
+									<span className="visually-hidden">Loading...</span>
+								</Spinner>
+							</td>
                         </tr>
                     )}
                 </tbody>
