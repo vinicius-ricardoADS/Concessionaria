@@ -3,16 +3,7 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Remove from '../../components/Remove';
-
-interface Car {
-	id: number;
-	name: string;
-	year: string;
-	price: number;
-	currency: string;
-	brand: string;
-	warranty: string;
-}
+import Car from '../../components/Interface/Car';
 
 
 export default function Home() {
