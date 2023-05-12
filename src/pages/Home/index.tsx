@@ -1,6 +1,8 @@
 import Table from 'react-bootstrap/Table';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import Remove from '../../components/Remove';
 
 interface Car {
 	id: number;
@@ -51,13 +53,18 @@ export default function Home() {
                                 <td>{car.currency}</td>
                                 <td>{car.brand}</td>
                                 <td>{car.warranty}</td>
-                                <td><Button variant="primary">Edit</Button>{' '}</td>
-                                <td><Button variant="danger">Remove</Button>{' '}</td>
+                                <td><Button value={car.id} as='a' href='/create' variant="primary">Edit</Button>{' '}</td>
+                                <td><Button onClick={(e) => {
+									e.preventDefault();
+									Remove(car.id);
+								}} value={car.id} as='a' variant="danger">Remove</Button>{' '}</td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td colSpan={7}>Loading...</td>
+                            <Spinner animation="border" role="status">
+								<span className="visually-hidden">Loading...</span>
+							</Spinner>
                         </tr>
                     )}
                 </tbody>
