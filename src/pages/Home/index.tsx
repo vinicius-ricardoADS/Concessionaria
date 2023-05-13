@@ -2,8 +2,8 @@ import Table from 'react-bootstrap/Table';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import Remove from '../../components/Remove';
 import Car from '../../components/Interface/Car';
+import { get, remove } from '../../services/api';
 
 
 export default function Home() {
@@ -11,23 +11,19 @@ export default function Home() {
     const [cars, setCars] = useState<Car[]>();
 
     useEffect (() => {
-        fetch('http://localhost:3000/cars', {
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(res => res.json()).then(res => setCars(res));
+        get('/cars').then(res => res.json()).then(res => setCars(res));
     }, []);
 
     return (
         <>
             <Table striped bordered hover variant="dark">
                 <thead>
-                    <tr>
+                    <tr>    
                         <th>Id</th>
                         <th>Name</th>
                         <th>Year</th>
                         <th>Price</th>
-                        <th>Currency</th>
+                        <th>Status</th>
                         <th>Brand</th>
                         <th>Warranty</th>
                         <th colSpan={2}>Options</th>
@@ -41,19 +37,20 @@ export default function Home() {
                                 <td>{car.name}</td>
                                 <td>{car.year}</td>
                                 <td>{car.price}</td>
-                                <td>{car.currency}</td>
+                                <td>{car.status}</td>
                                 <td>{car.brand}</td>
                                 <td>{car.warranty}</td>
                                 <td><Button value={car.id} as='a' href='/create' variant="primary">Edit</Button>{' '}</td>
-                                <td><Button onClick={(e) => {
+                                <td><Button onClick={async (e) => {
 									e.preventDefault();
-									Remove (car.id, () => {
-										fetch('http://localhost:3000/cars', {
-											headers: {
-												Accept: 'application/json'
-											}
-										}).then(res => res.json()).then(res => setCars(res));
-									});
+                                    
+                                    await remove('/cars', car.id) ? (
+                                        get('/cars').then(res => res.json()).then(res => setCars(res))
+                                    ) : (
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    )
 								}} value={car.id} as='a' variant="danger">Remove</Button>{' '}</td>
                             </tr>
                         ))

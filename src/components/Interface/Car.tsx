@@ -3,7 +3,7 @@ export default interface Car {
 	name: string;
 	year: string;
 	price: number;
-	currency: string;
+	status: string;
 	brand: string;
 	warranty: string;
 }
