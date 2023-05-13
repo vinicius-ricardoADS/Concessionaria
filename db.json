@@ -3,20 +3,22 @@
     {
       "id": 1,
       "name": "Carro legal",
+      "description": "Descrição de carro legal",
       "year": "2013 - 2015",
       "price": 30000.0,
-      "currency": "R$",
       "brand": "Marca legal",
-      "warranty": "5 anos"
+      "warranty": "5 anos",
+      "status": "Novo"
     },
     {
       "id": 2,
       "name": "Palio",
+      "description": "Descrição de carro legal",
       "year": "2007- 2015",
       "price": 13000.0,
-      "currency": "R$",
       "brand": "Fiat",
-      "warranty": "3 anos"
+      "warranty": "3 anos",
+      "status": "Novo"
     }
   ]
 }
