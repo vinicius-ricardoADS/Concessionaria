@@ -1,24 +1,24 @@
 {
   "cars": [
     {
-      "id": 1,
-      "name": "Carro legal",
-      "description": "Descrição de carro legal",
-      "year": "2013 - 2015",
-      "price": 30000.0,
-      "brand": "Marca legal",
-      "warranty": "5 anos",
-      "status": "Novo"
-    },
-    {
       "id": 2,
       "name": "Palio",
       "description": "Descrição de carro legal",
       "year": "2007- 2015",
-      "price": 13000.0,
+      "price": 13000,
       "brand": "Fiat",
       "warranty": "3 anos",
       "status": "Novo"
+    },
+    {
+      "name": "ChickPro85",
+      "year": 2,
+      "brand": "asdasd",
+      "price": 2,
+      "warranty": "sdf",
+      "status": "asdasd",
+      "description": "asdasd",
+      "id": 3
     }
   ]
 }

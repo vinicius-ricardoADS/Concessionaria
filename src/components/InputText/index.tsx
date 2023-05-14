@@ -11,29 +11,30 @@ interface InputProps {
 }
 
 export default function InputText({ type, id, label, description, ...rest }: InputProps & FormControlProps) {
-    const onChange = async(event: ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value);
-        await api.get('blablabla');
-    };
-
-    return (
-        <Form.Group>
-            <style type='text/css'>
-                {`
-                .form-text {
-                  color: rgba(1, 1, 1, 0.6) !important;
+  return (
+    <Form.Group>
+      <style type='text/css'>
+        {`
+                .form-label{
+                  color: white !important;
                 } 
+                .form-text {
+                  color: white !important;
+                } 
+                .form-control {
+                  background-color
+                }
                 `}
-            </style>
-            <Form.Label htmlFor={id}>{label}</Form.Label>
-            <Form.Control
-                type={type}
-                id={id}
-                aria-describedby={`${id}-help`}
-                onChange={onChange}
-                {...rest}
-            />
-            <Form.Text bsPrefix='' id={`${id}-help`} className="custom-form-text" muted>{description}</Form.Text>
-        </Form.Group>
-    );
+      </style>
+      <Form.Label htmlFor={id}>{label}</Form.Label>
+      <Form.Control
+        type={type}
+        id={id}
+        name={id}
+        aria-describedby={`${id}-help`}
+        {...rest}
+      />
+      <Form.Text bsPrefix='' id={`${id}-help`} className="custom-form-text" muted>{description}</Form.Text>
+    </Form.Group>
+  );
 }
