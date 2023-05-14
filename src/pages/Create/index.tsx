@@ -1,44 +1,131 @@
+import {ChangeEvent, FormEvent, useState} from 'react';
+import * as yup from 'yup';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import InputText from '../../components/InputText';
+import * as api from '../../services/api';
+
+interface CreateForm {
+  name?: string;
+  year?: number;
+  price?: number;
+  brand?: string;
+  warranty?: string;
+  status?: string;
+  description?: string;
+}
+
+interface FormError {
+  [k: string]: string;
+}
+
+const createSchema = yup.object({
+  name: yup.string().required('Campo obrigatório'),
+  year: yup.number().min(0).required('Campo obrigatório'),
+  price: yup.number().min(0).required('Campo obrigatório'),
+  brand: yup.string().required('Campo obrigatório'),
+  warranty: yup.string().required('Campo obrigatório'),
+  status: yup.string().required('Campo obrigatório'),
+  description: yup.string().required('Campo obrigatório'),
+});
 
 export default function Create() {
-    const onSubmit = (event: unknown) => {
-        (event as SubmitEvent).preventDefault();
-        console.log('hello');
-    };
+  const [form, setForm] = useState<CreateForm>({});
+  const [formErrors, setFormErrors] = useState<CreateForm>({});
 
-    return (
-        <Form onSubmit={onSubmit}>
-            <Container>
-              <Row>
-                <Col>
-                  <InputText placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' />
-                </Col>
-                <Col>
-                  <InputText placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançman' />
-                </Col>
-              </Row>
-            </Container>
-            <Container>
-              <Row>
-                <Col>
-                  <InputText placeholder='Ford' id='brand' label='Marca' description='Marca do carro' />
-                </Col>
-                <Col>
-                  <InputText placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' />
-                </Col>
-                <Col>
-                  <InputText placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' />
-                </Col>
-              </Row>
-            </Container>
-            <Container>
-              <InputText placeholder='Novo' id='status' label='Estado' description='Estado do carro' />
-            </Container>
-            <Container>
-              <InputText id='description' label='Descrição' description='Descrição do carro' />
-            </Container>
-            <Button type='submit'>Criar</Button>
-        </Form>
-    );
+  const onSubmit = async(event: unknown) => {
+    (event as SubmitEvent).preventDefault();
+    setFormErrors({});
+    try {
+      const validation = await createSchema.validate(form, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      if (err instanceof yup.ValidationError) {
+        const tempFormErrors: FormError = {}
+        err.inner.forEach(i => {
+          if (i.path) {
+            tempFormErrors[i.path] = i.message;
+          }
+        });
+        setFormErrors(tempFormErrors);
+        return;
+      } }
+
+    await api.post('/cars', {
+      body: JSON.stringify(form),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+  };
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.type);
+    if (event.target.type === 'number') {
+      setForm({
+        ...form,
+        [event.target.name]: Number(event.target.value),
+      });
+      return;
+    }
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  console.log(form);
+
+  return (
+    <Container>
+      <Form onSubmit={onSubmit}>
+        <Container>
+          <style type='text/css'>
+            {`
+              .container {
+                  background-color: #212529;
+                  padding: 20px;
+                  border-radius: 25px;
+              }
+                `}
+          </style>
+          <Row>
+            <Col>
+              <InputText onChange={onChange} placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' />
+              <div className='text-danger'>{formErrors.name}</div>
+            </Col>
+            <Col>
+              <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançman' />
+              <div className='text-danger'>{formErrors.year}</div>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col>
+              <InputText onChange={onChange} placeholder='Ford' id='brand' label='Marca' description='Marca do carro' />
+              <div className='text-danger'>{formErrors.brand}</div>
+            </Col>
+            <Col>
+              <InputText onChange={onChange} placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' />
+              <div className='text-danger'>{formErrors.price}</div>
+            </Col>
+            <Col>
+              <InputText onChange={onChange} placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' />
+              <div className='text-danger'>{formErrors.warranty}</div>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <InputText onChange={onChange} placeholder='Novo' id='status' label='Estado' description='Estado do carro' />
+          <div className='text-danger'>{formErrors.status}</div>
+        </Container>
+        <Container>
+          <InputText onChange={onChange} id='description' label='Descrição' description='Descrição do carro' />
+          <div className='text-danger'>{formErrors.description}</div>
+        </Container>
+        <Button type='submit'>Criar</Button>
+      </Form>
+    </Container>
+  );
 }
