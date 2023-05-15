@@ -1,18 +1,9 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import * as yup from 'yup';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import InputText from '../../components/InputText';
 import * as api from '../../services/api';
-
-interface CreateForm {
-  name?: string;
-  year?: number;
-  price?: number;
-  brand?: string;
-  warranty?: string;
-  status?: string;
-  description?: string;
-}
+import { CreateForm } from '../../components/Interface';
 
 interface FormError {
   [k: string]: string;

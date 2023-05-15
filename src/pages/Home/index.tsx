@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import Car from '../../components/Interface/Car';
+import { Car } from '../../components/Interface';
 import { get, remove } from '../../services/api';
 
 
