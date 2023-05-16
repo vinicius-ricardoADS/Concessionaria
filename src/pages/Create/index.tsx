@@ -48,6 +48,8 @@ export default function Create() {
         'Content-Type': 'application/json'
       },
     });
+
+    if (form) window.location.href = '/'
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

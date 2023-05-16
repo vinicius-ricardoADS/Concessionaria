@@ -19,6 +19,16 @@
       "status": "asdasd",
       "description": "asdasd",
       "id": 3
+    },
+    {
+      "name": "Fiesta",
+      "year": 2014,
+      "brand": "Chevrolet",
+      "price": 12000,
+      "warranty": "3 anos",
+      "status": "Antigo",
+      "description": "Antigo, porém bem cuidado.",
+      "id": 4
     }
   ]
 }
