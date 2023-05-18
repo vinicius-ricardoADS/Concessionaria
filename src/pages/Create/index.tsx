@@ -88,7 +88,7 @@ export default function Create() {
               <div className='text-danger'>{formErrors.name}</div>
             </Col>
             <Col>
-              <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançman' />
+              <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançamento' />
               <div className='text-danger'>{formErrors.year}</div>
             </Col>
           </Row>
