@@ -4,6 +4,8 @@ import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import InputText from '../../components/InputText';
 import * as api from '../../services/api';
 import { CreateForm } from '../../components/Interface';
+import Header from '../../components/Header';
+import {useNavigate} from 'react-router-dom';
 
 interface FormError {
   [k: string]: string;
@@ -20,6 +22,7 @@ const createSchema = yup.object({
 });
 
 export default function Create() {
+  const navigate = useNavigate();
   const [form, setForm] = useState<CreateForm>({});
   const [formErrors, setFormErrors] = useState<CreateForm>({});
 
@@ -49,7 +52,7 @@ export default function Create() {
       },
     });
 
-    if (form) window.location.href = '/'
+    navigate('/');
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +73,8 @@ export default function Create() {
   console.log(form);
 
   return (
+    <>
+      <Header />
     <Container>
       <Form onSubmit={onSubmit}>
         <Container>
@@ -120,5 +125,6 @@ export default function Create() {
         <Button type='submit'>Criar</Button>
       </Form>
     </Container>
+    </>
   );
 }

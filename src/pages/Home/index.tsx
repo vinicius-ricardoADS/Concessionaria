@@ -4,10 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { Car } from '../../components/Interface';
 import { get, remove } from '../../services/api';
+import Header from '../../components/Header';
+import {useNavigate} from 'react-router-dom';
 
 
 export default function Home() {
-
+  const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>();
 
   useEffect (() => {
@@ -16,6 +18,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>    
@@ -40,17 +43,12 @@ export default function Home() {
                 <td>{car.status}</td>
                 <td>{car.brand}</td>
                 <td>{car.warranty}</td>
-                <td><Button value={car.id} as='a' href='/create' variant="primary">Edit</Button>{' '}</td>
+                <td><Button onClick={() => {
+                  navigate(`/update/${car.id}`);
+                }} variant="primary">Edit</Button>{' '}</td>
                 <td><Button onClick={async (e) => {
-                  e.preventDefault();
-                                    
-                  await remove('/cars', car.id) ? (
-                    get('/cars').then(res => res.json()).then(res => setCars(res))
-                  ) : (
-                    <Spinner animation="border" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                  );
+                  await remove('/cars', car.id);
+                  get('/cars').then(res => res.json()).then(res => setCars(res));
                 }} value={car.id} as='a' variant="danger">Remove</Button>{' '}</td>
               </tr>
             ))
@@ -65,6 +63,9 @@ export default function Home() {
           )}
         </tbody>
       </Table>
+      <Button onClick={() => {
+        navigate('/create');
+      }} variant="primary">Create</Button>
     </>
   );
 }

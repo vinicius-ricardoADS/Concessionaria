@@ -1,34 +1,14 @@
 {
   "cars": [
     {
-      "id": 2,
-      "name": "Palio",
-      "description": "Descrição de carro legal",
-      "year": "2007- 2015",
-      "price": 13000,
-      "brand": "Fiat",
-      "warranty": "3 anos",
-      "status": "Novo"
-    },
-    {
       "name": "ChickPro85",
-      "year": 2,
+      "year": 4,
       "brand": "asdasd",
-      "price": 2,
+      "price": 3,
       "warranty": "sdf",
       "status": "asdasd",
-      "description": "asdasd",
-      "id": 3
-    },
-    {
-      "name": "Fiesta",
-      "year": 2014,
-      "brand": "Chevrolet",
-      "price": 12000,
-      "warranty": "3 anos",
-      "status": "Antigo",
-      "description": "Antigo, porém bem cuidado.",
-      "id": 4
+      "description": "Descricao carro foda",
+      "id": 1
     }
   ]
 }
