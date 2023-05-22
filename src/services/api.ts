@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:5173/api';
 
 export const post = async(uri: string, init?: RequestInit) => {
   return fetch(`${baseUrl}${uri}`, {

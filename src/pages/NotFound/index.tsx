@@ -1,5 +1,6 @@
-import { Container } from "react-bootstrap";
-import Header from "../../components/Header";
+/* eslint-disable linebreak-style */
+import { Container } from 'react-bootstrap';
+import Header from '../../components/Header';
 
 export default function NotFound() {
   return (
