@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import InputText from '../../components/InputText';
 import * as api from '../../services/api';
-import { CreateForm } from '../../components/Interface';
+import { CreateCarForm } from '../../types/car';
 import Header from '../../components/Header';
 import {useNavigate} from 'react-router-dom';
 
@@ -23,14 +23,14 @@ const createSchema = yup.object({
 
 export default function Create() {
   const navigate = useNavigate();
-  const [form, setForm] = useState<CreateForm>({});
-  const [formErrors, setFormErrors] = useState<CreateForm>({});
+  const [form, setForm] = useState<CreateCarForm>({});
+  const [formErrors, setFormErrors] = useState<FormError>({});
 
   const onSubmit = async(event: unknown) => {
     (event as SubmitEvent).preventDefault();
     setFormErrors({});
     try {
-      const validation = await createSchema.validate(form, {
+      await createSchema.validate(form, {
         abortEarly: false,
       });
     } catch (err) {
