@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import {Link} from 'react-router-dom';
 import carLogo from '../../../public/car-logo.svg';
 import './styles.css';
@@ -17,9 +18,12 @@ export default function Header() {
             <li className="nav-item">
               <Link className="nav-link" to="/create">Criar</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/create">Listar</Link>
+            </li>
           </ul>
         </div>
-        */}
+        */
       </div>
     </nav>
   );
