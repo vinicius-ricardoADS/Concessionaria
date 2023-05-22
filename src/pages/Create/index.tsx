@@ -6,6 +6,8 @@ import * as api from '../../services/api';
 import { CreateCarForm } from '../../types/car';
 import Header from '../../components/Header';
 import {useNavigate} from 'react-router-dom';
+import alerts from '../../lib/swal';
+import swal from '../../lib/swal';
 
 interface FormError {
   [k: string]: string;
@@ -52,11 +54,17 @@ export default function Create() {
       },
     });
 
+    swal.fire({
+      title: 'Sucesso!',
+      icon: 'success',
+      text: 'Um carro foi adicionado',
+      timer: 1000,
+      showConfirmButton: false,
+    });
     navigate('/');
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.type);
     if (event.target.type === 'number') {
       setForm({
         ...form,
@@ -69,8 +77,6 @@ export default function Create() {
       [event.target.name]: event.target.value,
     });
   };
-
-  console.log(form);
 
   return (
     <>

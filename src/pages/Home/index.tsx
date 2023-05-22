@@ -6,14 +6,47 @@ import { Car } from '../../types/car';
 import { get, remove } from '../../services/api';
 import Header from '../../components/Header';
 import {useNavigate} from 'react-router-dom';
+import swal from '../../lib/swal';
 
 
 export default function Home() {
   const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>();
 
+  async function fetchCars() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => { 
+      swal.fire({
+        title: 'Erro',
+        icon: 'error',
+        text: 'Tempo limite de requisição excedido',
+        timer: 1000,
+        showConfirmButton: false,
+      });
+
+      controller.abort();
+    }, 10000);
+
+    try {
+      const response = await get('/cars');
+      const json = await response.json();
+
+      setCars(json);
+    } catch (err) {
+      swal.fire({
+        title: 'Erro',
+        icon: 'error',
+        text: 'Não foi possível recuperar os carros do servidor',
+        timer: 1000,
+        showConfirmButton: false,
+      });
+    }
+
+    clearTimeout(timeout);
+  }
+
   useEffect (() => {
-    get('/cars').then(res => res.json()).then(setCars);
+    fetchCars();
   }, []);
 
   return (
@@ -21,8 +54,7 @@ export default function Home() {
       <Header />
       <Table striped bordered hover variant="dark">
         <thead>
-          <tr>    
-            <th>Id</th>
+          <tr>    <th>Id</th>
             <th>Nome</th>
             <th>Ano</th>
             <th>Preço</th>
@@ -50,7 +82,15 @@ export default function Home() {
                 }} variant="primary">Editar</Button>{' '}</td>
                 <td><Button onClick={async (e) => {
                   await remove('/cars', car.id);
-                  get('/cars').then(res => res.json()).then(res => setCars(res));
+                  fetchCars();
+                  swal.fire({
+                    title: 'Sucesso!',
+                    icon: 'success',
+                    text: 'Carro removido',
+                    timer: 1000,
+                    showConfirmButton: false,
+                  });
+
                 }} value={car.id} as='a' variant="danger">Remover</Button>{' '}</td>
               </tr>
             ))

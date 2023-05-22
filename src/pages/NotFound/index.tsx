@@ -7,7 +7,9 @@ export default function NotFound() {
     <>
       <Header />
       <Container>
-        <h1>Página não encontrada 😟</h1>
+        <h1 style={{
+          color: 'white',
+        }}>Página não encontrada 😟</h1>
       </Container>
     </>
   );
