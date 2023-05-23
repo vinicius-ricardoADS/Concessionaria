@@ -14,6 +14,13 @@ export const get = async(uri: string, init?: RequestInit) => {
   });
 };
 
+export const put = async ( uri: string, id?: number, init?: RequestInit) => {
+  return await fetch(`${baseUrl}${uri}/${id}`, {
+    method: 'put',
+    ...init
+  });
+};
+
 export const remove = async ( uri: string, id?: number, init?: RequestInit) => {
   return await fetch(`${baseUrl}${uri}/${id}`, {
     method: 'DELETE',
