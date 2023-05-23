@@ -1,16 +1,16 @@
-import {ChangeEvent, FormEventHandler} from 'react';
+/* eslint-disable linebreak-style */
 import {Form, FormControlProps} from 'react-bootstrap';
-import * as api from '../../services/api';
 
 interface InputProps {
   id: string;
   label: string;
   description: string;
+  value?: any,
   min?: number;
   max?: number;
 }
 
-export default function InputText({ type, id, label, description, ...rest }: InputProps & FormControlProps) {
+export default function InputText({ type, value, id, label, description, ...rest }: InputProps & FormControlProps) {
   return (
     <Form.Group>
       <style type='text/css'>
@@ -31,6 +31,7 @@ export default function InputText({ type, id, label, description, ...rest }: Inp
         type={type}
         id={id}
         name={id}
+        value={value}
         aria-describedby={`${id}-help`}
         {...rest}
       />

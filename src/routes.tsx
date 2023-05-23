@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Create from './pages/Create';
 import Home from './pages/Home';
@@ -10,6 +11,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/create" element={<Create />} />
       <Route path="/list" element={<List />} />
+      <Route path="/update/:id" element={<Create />} />
     </Route>
   )
 );

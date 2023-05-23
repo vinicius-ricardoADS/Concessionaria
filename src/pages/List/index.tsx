@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import Table from 'react-bootstrap/Table';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -50,6 +51,7 @@ export default function Home() {
                   navigate(`/update/${car.id}`);
                 }} variant="primary">Editar</Button>{' '}</td>
                 <td><Button onClick={async (e) => {
+                  e.preventDefault();
                   await remove('/cars', car.id);
                   get('/cars').then(res => res.json()).then(res => setCars(res));
                 }} value={car.id} as='a' variant="danger">Remover</Button>{' '}</td>

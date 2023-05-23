@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const baseUrl = 'http://localhost:5173/api';
 
 export const post = async(uri: string, init?: RequestInit) => {
@@ -17,6 +18,13 @@ export const get = async(uri: string, init?: RequestInit) => {
 export const remove = async ( uri: string, id?: number, init?: RequestInit) => {
   return await fetch(`${baseUrl}${uri}/${id}`, {
     method: 'DELETE',
+    ...init
+  });
+};
+
+export const put = async ( uri: string, id?: number, init?: RequestInit) => {
+  return await fetch(`${baseUrl}${uri}/${id}`, {
+    method: 'PUT',
     ...init
   });
 };

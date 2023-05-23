@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import {Link} from 'react-router-dom';
 import carLogo from '../../../public/car-logo.svg';
 import twitter from '../../../public/twitter-logo.svg';
@@ -7,7 +8,7 @@ import '../Header/styles.css';
 
 export default function Footer() {
   return (
-    <footer className="navbar-expand-lg navbar-dark bg-dark fixed-bottom w-100">
+    <footer className="w-100 navbar-expand-lg navbar-dark bg-dark fixed-bottom w-100">
       <div className='flex'>
         <Link className="navbar-brand" to="/">
           <div className='flex-logo'>
@@ -26,7 +27,7 @@ export default function Footer() {
         <div className='flex navbar-brand'>
           <div>
             <Link className="navbar-brand" to="https://www.instagram.com/center_cars_web/">
-                <img src={instagram} alt="logo-instagram" />
+              <img src={instagram} alt="logo-instagram" />
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -34,7 +35,7 @@ export default function Footer() {
           </div>
           <div>
             <Link className="navbar-brand" to="https://www.linkedin.com/in/hdk101/">
-                <img src={linkedin} alt="logo-linkedin" />
+              <img src={linkedin} alt="logo-linkedin" />
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -42,7 +43,7 @@ export default function Footer() {
           </div>
           <div>
             <Link className="navbar-brand" to="https://twitter.com/Momocromics">
-                <img src={twitter} alt="logo-twitter" />
+              <img src={twitter} alt="logo-twitter" />
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

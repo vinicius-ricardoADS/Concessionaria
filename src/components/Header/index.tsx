@@ -5,7 +5,7 @@ import './styles.css';
 
 export default function Header() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top w-100">
+    <nav className="w-100 navbar navbar-expand-lg navbar-dark bg-dark fixed-top w-100">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img src={carLogo} alt="Logo" className='logo-img' />
