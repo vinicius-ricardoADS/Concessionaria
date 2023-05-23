@@ -1,3 +1,24 @@
 .logo-img {
   width: 60px;
 }
+
+.flex-logo {
+  display: flex;
+  align-items: center; /* Alinha ao centro verticalmente */
+}
+
+.flex {
+  justify-content: space-around;
+  display: flex;
+  align-items: center; /* Alinha ao centro verticalmente */
+}
+
+.flex div {
+  padding: 10px;
+  align-items: center;
+}
+
+.flex p {
+  height: 15px;
+  padding-left: 10px;
+}

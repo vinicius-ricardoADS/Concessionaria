@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import {ChangeEvent, useState} from 'react';
 import * as yup from 'yup';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
@@ -6,6 +7,7 @@ import * as api from '../../services/api';
 import { CreateCarForm } from '../../types/car';
 import Header from '../../components/Header';
 import {useNavigate} from 'react-router-dom';
+import Footer from '../../components/Footer';
 import alerts from '../../lib/swal';
 import swal from '../../lib/swal';
 
@@ -37,7 +39,7 @@ export default function Create() {
       });
     } catch (err) {
       if (err instanceof yup.ValidationError) {
-        const tempFormErrors: FormError = {}
+        const tempFormErrors: FormError = {};
         err.inner.forEach(i => {
           if (i.path) {
             tempFormErrors[i.path] = i.message;
@@ -61,7 +63,7 @@ export default function Create() {
       timer: 1000,
       showConfirmButton: false,
     });
-    navigate('/');
+    navigate('/list');
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -81,56 +83,57 @@ export default function Create() {
   return (
     <>
       <Header />
-    <Container>
-      <Form onSubmit={onSubmit}>
-        <Container>
-          <style type='text/css'>
-            {`
+      <Container>
+        <Form onSubmit={onSubmit}>
+          <Container>
+            <style type='text/css'>
+              {`
               .container {
                   background-color: #212529;
                   padding: 20px;
                   border-radius: 25px;
               }
                 `}
-          </style>
-          <Row>
-            <Col>
-              <InputText onChange={onChange} placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' />
-              <div className='text-danger'>{formErrors.name}</div>
-            </Col>
-            <Col>
-              <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançamento' />
-              <div className='text-danger'>{formErrors.year}</div>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row>
-            <Col>
-              <InputText onChange={onChange} placeholder='Ford' id='brand' label='Marca' description='Marca do carro' />
-              <div className='text-danger'>{formErrors.brand}</div>
-            </Col>
-            <Col>
-              <InputText onChange={onChange} placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' />
-              <div className='text-danger'>{formErrors.price}</div>
-            </Col>
-            <Col>
-              <InputText onChange={onChange} placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' />
-              <div className='text-danger'>{formErrors.warranty}</div>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <InputText onChange={onChange} placeholder='Novo' id='status' label='Estado' description='Estado do carro' />
-          <div className='text-danger'>{formErrors.status}</div>
-        </Container>
-        <Container>
-          <InputText onChange={onChange} id='description' label='Descrição' description='Descrição do carro' />
-          <div className='text-danger'>{formErrors.description}</div>
-        </Container>
-        <Button type='submit'>Criar</Button>
-      </Form>
-    </Container>
+            </style>
+            <Row>
+              <Col>
+                <InputText onChange={onChange} placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' />
+                <div className='text-danger'>{formErrors.name}</div>
+              </Col>
+              <Col>
+                <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançamento' />
+                <div className='text-danger'>{formErrors.year}</div>
+              </Col>
+            </Row>
+          </Container>
+          <Container>
+            <Row>
+              <Col>
+                <InputText onChange={onChange} placeholder='Ford' id='brand' label='Marca' description='Marca do carro' />
+                <div className='text-danger'>{formErrors.brand}</div>
+              </Col>
+              <Col>
+                <InputText onChange={onChange} placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' />
+                <div className='text-danger'>{formErrors.price}</div>
+              </Col>
+              <Col>
+                <InputText onChange={onChange} placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' />
+                <div className='text-danger'>{formErrors.warranty}</div>
+              </Col>
+            </Row>
+          </Container>
+          <Container>
+            <InputText onChange={onChange} placeholder='Novo' id='status' label='Estado' description='Estado do carro' />
+            <div className='text-danger'>{formErrors.status}</div>
+          </Container>
+          <Container>
+            <InputText onChange={onChange} id='description' label='Descrição' description='Descrição do carro' />
+            <div className='text-danger'>{formErrors.description}</div>
+          </Container>
+          <Button type='submit'>Criar</Button>
+        </Form>
+      </Container>
+      <Footer />
     </>
   );
 }

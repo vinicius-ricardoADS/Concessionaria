@@ -19,7 +19,7 @@ export default function Header() {
               <Link className="nav-link" to="/create">Criar</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/create">Listar</Link>
+              <Link className="nav-link" to="/list">Listar</Link>
             </li>
           </ul>
         </div>
