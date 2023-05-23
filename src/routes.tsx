@@ -9,7 +9,8 @@ const router = createBrowserRouter(
     <Route errorElement={<NotFound />}>
       <Route path="/" element={<Home />} />
       <Route path="/create" element={<Create />} />
-      <Route path="/list" element={<List />} />
+      <Route path="/list" element={<List/>}/>
+      <Route path="/update/:id" element={<Create/>}/>           
     </Route>
   )
 );
