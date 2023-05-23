@@ -1,1 +1,1 @@
-[{"name":"Fiesta","year":2015,"brand":"Chevrolet","price":13000,"warranty":"5 anos","status":"Antigo","description":"Antigo, porém bem cuidado.","id":1}]
+[{"name":"Fiesta","year":2015,"brand":"Chevrolet","price":13000,"warranty":"5 anos","status":"Antigo","description":"Antigo, porém bem cuidado.","id":1},{"message":"Not Found, id=NaN","name":"Fusca","year":1960,"brand":"Chevrolet","price":5000,"warranty":"0","status":"Muito Usado","description":"Herbie, o fusca turbinado","id":2}]

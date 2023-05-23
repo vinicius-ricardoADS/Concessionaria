@@ -1,12 +1,12 @@
 /* eslint-disable linebreak-style */
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useState, useEffect} from 'react';
 import * as yup from 'yup';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import InputText from '../../components/InputText';
 import * as api from '../../services/api';
 import { CreateCarForm } from '../../types/car';
 import Header from '../../components/Header';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import Footer from '../../components/Footer';
 import alerts from '../../lib/swal';
 import swal from '../../lib/swal';
@@ -29,6 +29,20 @@ export default function Create() {
   const navigate = useNavigate();
   const [form, setForm] = useState<CreateCarForm>({});
   const [formErrors, setFormErrors] = useState<FormError>({});
+  const {id} = useParams<{id:string}>();
+
+  const isEditing = !!id;
+
+  useEffect( () => {
+    const getCar = async () =>{
+      const response = await api.get(`/cars/${id}`);
+      const car = await response.json();
+
+      setForm(car);
+    }
+
+    getCar();
+  }, [id])
 
   const onSubmit = async(event: unknown) => {
     (event as SubmitEvent).preventDefault();
@@ -49,20 +63,29 @@ export default function Create() {
         return;
       } }
 
-    await api.post('/cars', {
-      body: JSON.stringify(form),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
+    if(isEditing){
+      await api.put('/cars', parseInt(id), {
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
 
-    swal.fire({
-      title: 'Sucesso!',
-      icon: 'success',
-      text: 'Um carro foi adicionado',
-      timer: 1000,
-      showConfirmButton: false,
-    });
+      swal.fire({
+        title: 'Sucesso!',
+        icon: 'success',
+        text: 'Um carro foi editado',
+        timer: 1000,
+        showConfirmButton: false,
+      });
+    }else{
+      await api.post('/cars', {
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+    }
     navigate('/list');
   };
 
@@ -97,11 +120,12 @@ export default function Create() {
             </style>
             <Row>
               <Col>
-                <InputText onChange={onChange} placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' />
+                <InputText onChange={onChange} placeholder='Fiesta' id='name' label='Nome' description='Nome do carro' value={isEditing ? form.name : undefined} />
                 <div className='text-danger'>{formErrors.name}</div>
               </Col>
               <Col>
-                <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançamento' />
+                <InputText onChange={onChange} placeholder='2023' type='number' min={1} id='year' label='Lançamento' description='Data de lançamento' 
+                value={isEditing ? form.year : undefined}/>
                 <div className='text-danger'>{formErrors.year}</div>
               </Col>
             </Row>
@@ -109,28 +133,32 @@ export default function Create() {
           <Container>
             <Row>
               <Col>
-                <InputText onChange={onChange} placeholder='Ford' id='brand' label='Marca' description='Marca do carro' />
+                <InputText onChange={onChange} placeholder='Ford' id='brand' label='Marca' description='Marca do carro' value={isEditing ? form.brand : undefined}/>
                 <div className='text-danger'>{formErrors.brand}</div>
               </Col>
               <Col>
-                <InputText onChange={onChange} placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' />
+                <InputText onChange={onChange} placeholder='R$ 20000,00' type='number' min={1} id='price' label='Preço' description='Preço' value={isEditing ? form.price : undefined}/>
                 <div className='text-danger'>{formErrors.price}</div>
               </Col>
               <Col>
-                <InputText onChange={onChange} placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' />
+                <InputText onChange={onChange} placeholder='2 anos' id='warranty' label='Garantia' description='Garantia' value={isEditing ? form.warranty : undefined}/>
                 <div className='text-danger'>{formErrors.warranty}</div>
               </Col>
             </Row>
           </Container>
           <Container>
-            <InputText onChange={onChange} placeholder='Novo' id='status' label='Estado' description='Estado do carro' />
+            <InputText onChange={onChange} placeholder='Novo' id='status' label='Estado' description='Estado do carro' value={isEditing ? form.status : undefined}/>
             <div className='text-danger'>{formErrors.status}</div>
           </Container>
           <Container>
-            <InputText onChange={onChange} id='description' label='Descrição' description='Descrição do carro' />
+            <InputText onChange={onChange} id='description' label='Descrição' description='Descrição do carro' value={isEditing ? form.description : undefined}/>
             <div className='text-danger'>{formErrors.description}</div>
           </Container>
-          <Button type='submit'>Criar</Button>
+          {isEditing ? (
+            <Button type='submit'>Editar</Button>
+          ) : (
+            <Button type='submit'>Criar</Button>
+          )}
         </Form>
       </Container>
       <Footer />
