@@ -1,3 +1,52 @@
 .flex {
-    display: flex;
+  display: flex;
+  gap: 5vw;
+}
+
+.left-image-block {
+  background-image: url('concessionaria.jpg');
+  width: 30vw;
+  height: 30vw;
+}
+
+.left-image-anchor {
+  display: flex;
+  width: 30vw;
+  height: 30vw;
+  transition: color 2s;
+
+  color: rgba(255, 255, 255,0.5);
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.left-image-anchor:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.right-image-block {
+  background-image: url('concessionaria-2.jpg');
+  width: 30vw;
+  height: 30vw;
+}
+
+.right-image-anchor {
+  display: flex;
+  width: 30vw;
+  height: 30vw;
+  transition: color 2s;
+
+  color: rgba(255, 255, 255,0.5);
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.right-image-anchor:hover {
+  color: rgba(255, 255, 255, 1);
 }
