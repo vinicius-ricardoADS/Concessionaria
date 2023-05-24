@@ -1,52 +1,43 @@
-.flex {
-  display: flex;
-  gap: 5vw;
+.flex-home {
+    display: flex;
 }
 
-.left-image-block {
-  background-image: url('concessionaria.jpg');
-  width: 30vw;
-  height: 30vw;
+.center {
+  position: relative;
+  width: 100%;
 }
 
-.left-image-anchor {
-  display: flex;
-  width: 30vw;
-  height: 30vw;
-  transition: color 2s;
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
 
-  color: rgba(255, 255, 255,0.5);
+.container:hover img {
+  opacity: 0.6;
+}
+
+.middle {
+  transition: .5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+}
+
+.middle a {
+  color: transparent;
   text-decoration: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 32px;
-  font-weight: 600;
+  padding: 10px 20px;
+  transition: color 0.3s;
 }
 
-.left-image-anchor:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.right-image-block {
-  background-image: url('concessionaria-2.jpg');
-  width: 30vw;
-  height: 30vw;
-}
-
-.right-image-anchor {
-  display: flex;
-  width: 30vw;
-  height: 30vw;
-  transition: color 2s;
-
-  color: rgba(255, 255, 255,0.5);
-  text-decoration: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 32px;
-  font-weight: 600;
-}
-
-.right-image-anchor:hover {
-  color: rgba(255, 255, 255, 1);
+.container:hover .middle a {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
 }

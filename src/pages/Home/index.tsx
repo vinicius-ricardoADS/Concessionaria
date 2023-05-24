@@ -3,9 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import concessionaria from '../../../public/concessionaria.jpg';
 import concessionaria_2 from '../../../public/concessionaria-2.jpg';
-
 import './styles.css';
-import {Link} from 'react-router-dom';
 
 export default function Home() {
 
@@ -13,13 +11,21 @@ export default function Home() {
     <>
       <Header />
       <div className='flex'>
-        <div className='right left-image-block'>
-          <Link className='left-image-anchor' to="/create">Inserir carros</Link>
+        <div className='container'>
+          <div className="center">
+            <img src={concessionaria} alt="Carro Garagem" />
+            <div className="middle">
+              <a href="/create">Registrar Carro</a>
+            </div>
+          </div>
         </div>
-        <div className='left right-image-block'>
-          <a href="/list">
-            <Link className='left-image-anchor' to="/list">Listar carros</Link>
-          </a>
+        <div className='container'>
+          <div className="center">
+            <img src={concessionaria_2} alt="Carros Garagens" />
+            <div className="middle">
+              <a href="/list">Listar Carros</a>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
