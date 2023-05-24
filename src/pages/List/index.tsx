@@ -8,6 +8,7 @@ import { get, remove } from '../../services/api';
 import Header from '../../components/Header';
 import {useNavigate} from 'react-router-dom';
 import Footer from '../../components/Footer';
+import swal from '../../lib/swal';
 
 
 export default function Home() {
@@ -53,6 +54,13 @@ export default function Home() {
                 <td><Button onClick={async (e) => {
                   e.preventDefault();
                   await remove('/cars', car.id);
+                  swal.fire({
+                    title: 'Sucesso!',
+                    icon: 'success',
+                    text: 'Um carro foi removido',
+                    timer: 1000,
+                    showConfirmButton: false,
+                  });
                   get('/cars').then(res => res.json()).then(res => setCars(res));
                 }} value={car.id} as='a' variant="danger">Remover</Button>{' '}</td>
               </tr>
