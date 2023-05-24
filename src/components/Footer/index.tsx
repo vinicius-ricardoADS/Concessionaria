@@ -42,7 +42,7 @@ export default function Footer() {
             </button>
           </div>
           <div>
-            <Link className="navbar-brand" to="https://twitter.com/Momocromics">
+            <Link className="navbar-brand" to="https://twitter.com/elonmusk">
               <img src={twitter} alt="logo-twitter" />
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
